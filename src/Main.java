@@ -13,7 +13,7 @@ public class Main {
 
 		} while (length == null && width == null);*/
 
-		byte numMines = 41;
+		byte numMines = 30;
 		/*do {
 
 		} while (numMines == null);*/
@@ -25,15 +25,13 @@ public class Main {
 			System.out.print("Choose space to reveal: ");
 			byte[] position = {(byte) (input.nextByte() - 1), (byte) (input.nextByte() - 1)};
 			board.updateBoard(position);
-			outputBoard();
 			if (board.lostGame(position)) {
-				System.out.println("You hit a mine!");
-				System.exit(0);
+				endGame("You hit a mine!", position);
 			}
 			if (board.wonGame()) {
-				System.out.println("You survived!");
-				System.exit(0);
+				endGame("You survived!", position);
 			}
+			outputBoard();
 		}
 	}
 
@@ -48,7 +46,9 @@ public class Main {
 			System.out.printf("%2d ", i + 1);
 			for (byte j = 0; j < board.getWIDTH(); j++) {
 				byte aByte = currentBoard[i][j];
-				if (aByte == 0) {
+				if (aByte == -1) {
+					System.out.print("*  ");
+				} else if (aByte == 0) {
 					System.out.print("\u001B[31m*\u001B[38m  ");
 				} else if (aByte == 9) {
 					System.out.print("-  ");
@@ -60,5 +60,12 @@ public class Main {
 			}
 			System.out.println();
 		}
+	}
+
+	private static void endGame (String endMessage, byte[] pos) {
+		board.showMines(pos);
+		outputBoard();
+		System.out.println(endMessage);
+		System.exit(0);
 	}
 }

@@ -102,6 +102,15 @@ public class Board {
 		return VISIBLE_BOARD[pos[0]][pos[1]] == 0;
 	}
 
+	public void showMines(byte[] pos) {
+		for (byte i = 0; i < LENGTH; i++) {
+			for (byte j = 0; j < WIDTH; j++) {
+				if (i == pos[0] && j == pos[1]) continue;
+				if (VISIBLE_BOARD[i][j] == 0) HIDDEN_BOARD[i][j] = -1;
+			}
+		}
+	}
+
 	private byte checkSurroundings(byte posX, byte posY) {
 		if (VISIBLE_BOARD[posX][posY] == 0) return 0;
 		byte count = 0;
