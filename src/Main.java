@@ -36,7 +36,7 @@ public class Main {
 				numMines = 0;
 				input.next();
 			}
-		} while (numMines <= 0);
+		} while (numMines <= 0 || numMines > length * width - 1);
 
 		System.out.println("Creating board!");
 		board = new Board(length, width, numMines);
