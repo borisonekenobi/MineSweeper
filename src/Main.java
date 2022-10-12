@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
 	private static Board board;
 
 	public static void main (String[] args) {
@@ -63,7 +66,7 @@ public class Main {
 
 	private static void outputBoard () {
 		System.out.print(" ");
-		for (byte i = 1; i <= board.getLENGTH(); i++) {
+		for (byte i = 1; i <= board.getWIDTH(); i++) {
 			System.out.printf("%3d", i);
 		}
 		System.out.println();
@@ -75,11 +78,11 @@ public class Main {
 				if (aByte == -1) {
 					System.out.print("*  ");
 				} else if (aByte == 0) {
-					System.out.print("\u001B[31m*\u001B[38m  ");
+					System.out.print(ANSI_RED + "*  " + ANSI_RESET);
 				} else if (aByte == 9) {
 					System.out.print("-  ");
 				} else if (aByte == 10) {
-					System.out.print("\u001B[30m-\u001B[38m  ");
+					System.out.print(ANSI_BLACK + "-  " + ANSI_RESET);
 				} else {
 					System.out.print(aByte + "  ");
 				}
